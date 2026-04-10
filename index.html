@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love</title>
+    <title>Happy Birthday</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -136,6 +136,13 @@
             border-radius: 15px;
             overflow: hidden;
             position: relative;
+        }
+
+        /* Mobile responsive slider height */
+        @media (max-width: 768px) {
+            .slider-frame {
+                height: 70vh;
+            }
         }
 
         .slider-images {
@@ -292,7 +299,7 @@
 
     <div class="container">
         <div class="profile-container">
-            <img src="https://via.placeholder.com/150" alt="Birthday Person" class="profile-img">
+            <img src="img.jpeg" alt="Bth" class="profile-img">
         </div>
 
         <h1 class="animated-name cursor-blink" id="bday-title" style="min-height: 60px;"></h1>
@@ -301,9 +308,9 @@
 
         <div class="slider-frame">
             <div class="slider-images">
-                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=500" alt="Memories 1">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=500" alt="Memories 2">
-                <img src="https://images.unsplash.com/photo-1530103862676-fa8c91bbe17d?auto=format&fit=crop&q=80&w=500" alt="Memories 3">
+                <img src="img.jpeg" alt="Memories 1">
+                <img src="img-1.jpeg" alt="Memories 2">
+                <img src="happy-birthday.jpg" alt="Memories 3">
             </div>
         </div>
 
@@ -322,9 +329,9 @@
             </audio>
         </div>
 
-        <a href="https://wa.me/?text=Happy%20Birthday!%20Check%20this%20out!" class="whatsapp-btn">
+        <!-- <a href="https://wa.me/?text=Happy%20Birthday!%20Check%20this%20out!" class="whatsapp-btn">
             Send a Hug via WhatsApp 📲
-        </a>
+        </a> -->
     </div>
 
     <script>
@@ -355,7 +362,7 @@
 
             // After the intro screen fades out, start the typing animation
             setTimeout(() => {
-                typeWriter('bday-title', 'Happy Birthday, Alex!', 100, () => {
+                typeWriter('bday-title', 'Happy Birthday, Vandana💕!', 100, () => {
                     // Move the blinking cursor from the title to the description
                     document.getElementById('bday-title').classList.remove('cursor-blink');
                     document.getElementById('bday-desc').classList.add('cursor-blink');
