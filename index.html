@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ffafbd;
+            --secondary-purple: #ffc3a0;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #4a4a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ee9ca7, #ffdde1, #b19cd9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Falling Hearts (Pure CSS) --- */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Glassmorphism Card --- */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* --- Profile Section --- */
+        .profile-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .animated-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffafbd; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ffafbd, 0 0 30px #ffafbd; }
+        }
+
+        /* --- Typing Animation --- */
+        .typing-text {
+            display: inline-block;
+            white-space: nowrap;
+            font-weight: 300;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            min-height: 24px;
+        }
+
+        .cursor-blink {
+            border-right: 2px solid #d63384;
+            animation: blink 0.8s infinite;
+            padding-right: 5px;
+        }
+
+        @keyframes blink { 50% { border-color: transparent } }
+
+        /* --- Photo Slider (CSS Only) --- */
+        .slider-frame {
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-images {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slide 12s infinite;
+        }
+
+        .slider-images img {
+            width: 100.33%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(0); }
+            33% { transform: translateX(-33.33%); }
+            63% { transform: translateX(-33.33%); }
+            66% { transform: translateX(-66.66%); }
+            96% { transform: translateX(-66.66%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- Click to Reveal --- */
+        #reveal-check { display: none; }
+        .reveal-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #d63384;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .secret-message {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s ease-out;
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        #reveal-check:checked ~ .secret-message {
+            max-height: 500px;
+        }
+
+        #reveal-check:checked ~ .reveal-btn {
+            display: none;
+        }
+
+        /* --- Music Controller --- */
+        .music-player {
+            margin-top: 20px;
+            opacity: 0.6;
+        }
+
+        audio {
+            height: 30px;
+            width: 200px;
+        }
+
+        /* --- WhatsApp Button --- */
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+        
+        .whatsapp-btn:hover { transform: scale(1.05); }
+
+        /* --- Intro Screen --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(45deg, #ee9ca7, #ffdde1, #b19cd9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        #intro-screen h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #d63384;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .enter-btn {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background: #d63384;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(214, 51, 132, 0.6);
+        }
+
+        .hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Intro Screen -->
+    <div id="intro-screen">
+        <button class="enter-btn" onclick="enterSite()">Click to Open 🎁</button>
+    </div>
+
+    <div class="heart-bg">
+        <div class="heart-particle" style="left:10%; animation-duration: 5s;">❤</div>
+        <div class="heart-particle" style="left:30%; animation-duration: 7s; animation-delay: 2s;">💕</div>
+        <div class="heart-particle" style="left:50%; animation-duration: 6s; animation-delay: 1s;">💖</div>
+        <div class="heart-particle" style="left:70%; animation-duration: 8s;">❤</div>
+        <div class="heart-particle" style="left:90%; animation-duration: 5.5s; animation-delay: 3s;">💗</div>
+    </div>
+
+    <div class="container">
+        <div class="profile-container">
+            <img src="https://via.placeholder.com/150" alt="Birthday Person" class="profile-img">
+        </div>
+
+        <h1 class="animated-name cursor-blink" id="bday-title" style="min-height: 60px;"></h1>
+        <br>
+        <div class="typing-text" id="bday-desc"></div>
+
+        <div class="slider-frame">
+            <div class="slider-images">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=500" alt="Memories 1">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=500" alt="Memories 2">
+                <img src="https://images.unsplash.com/photo-1530103862676-fa8c91bbe17d?auto=format&fit=crop&q=80&w=500" alt="Memories 3">
+            </div>
+        </div>
+
+        <input type="checkbox" id="reveal-check">
+        <label for="reveal-check" class="reveal-btn">Click for a Surprise 🎁</label>
+        
+        <div class="secret-message">
+            <p>"सच कहूँ तो मेरे पास अल्फ़ाज़ ही नहीं हैं कि बता सकूँ तुम मेरे लिए क्या हो! 🙈❤️ जब से तुम मेरी ज़िंदगी में आई हो, हर दिन किसी खूबसूरत जादू सा लगता है। ✨ तुम्हारी वो प्यारी सी मुस्कान 🥺, तुम्हारी बच्चों जैसी बातें 🦋 और तुम्हारा मेरे लिए वो बेइंतहा प्यार... मुझे दुनिया का सबसे खुशनसीब इंसान बनाता है। 🧿 मैं बस इतना चाहता हूँ कि ये हसीन मुस्कान तुम्हारे चेहरे से कभी न जाए.. मेरी हर धड़कन सिर्फ तुम्हारा नाम लेती है! 👩‍❤️‍💋‍👨 जन्मदिन बहुत-बहुत मुबारक हो मेरी जान, आई लव यू हमेशा! ♾️��"</p>
+        </div>
+
+        <div class="music-player">
+            <p style="font-size: 0.7rem; margin-bottom: 5px;">Press Play for Vibes 🎵</p>
+            <audio controls>
+                <source src="Raatan Lambiyan_320(PagalWorld.com.se).mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <a href="https://wa.me/?text=Happy%20Birthday!%20Check%20this%20out!" class="whatsapp-btn">
+            Send a Hug via WhatsApp 📲
+        </a>
+    </div>
+
+    <script>
+        function typeWriter(elementId, text, speed, callback) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        function enterSite() {
+            // Hide intro screen with a fade-out effect
+            document.getElementById('intro-screen').classList.add('hidden');
+            
+            // Try to play audio automatically on button click
+            const audio = document.querySelector('audio');
+            if (audio) {
+                audio.play().catch(err => console.log("Audio play blocked", err));
+            }
+
+            // After the intro screen fades out, start the typing animation
+            setTimeout(() => {
+                typeWriter('bday-title', 'Happy Birthday, Alex!', 100, () => {
+                    // Move the blinking cursor from the title to the description
+                    document.getElementById('bday-title').classList.remove('cursor-blink');
+                    document.getElementById('bday-desc').classList.add('cursor-blink');
+                    
+                    // Start typing the subtitle
+                    typeWriter('bday-desc', 'To my favorite person in the world...', 50, () => {
+                        // Typing finished
+                    });
+                });
+            }, 800); // 800ms wait matches the fade transition time roughly
+        }
+    </script>
+</body>
+</html>
